@@ -1,11 +1,88 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" type="text/css" href="style.css">
 		<script src="./jquery-3.4.1.slim.min.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
+		<script   type="text/javascript" src="./functions.js"></script>
 	</head>
 
-	<body>
+	<body onload="onLoaded()">
+
+		<header  class="header">
+			<div align="center" ><img src= "picture/logo2.jpg"  width="15%" >
+			<img src= "picture/logo.png"  width="50%" >
+			<img src= "picture/logo2.jpg"  width="15%" ></div>
+
+		<ul>
+			<li><a class="tablinks" onclick="ShowMenu('Welcome')" href="#">Welcome</a></li>
+			<li><a class="tablinks" onclick="ShowMenu('Register')" href="#">Register</a></li>
+			<li><a class="tablinks" onclick="ShowMenu('Login')" href="#">Login</a></li>
+			<li> <a class="tablinks" id="dialog" onclick="openDialog()">About</a></li>
+			<li><a class="tablinks" onclick="ShowMenu('gameSetting')" href="#">StartGame</a></li>
+		  </ul>
+			
+		<div id="Welcome" class="tabcontent">
+			
+		</div>
+		<div id="Register" class="tabcontent"></div>
+		<div id="Login" class="tabcontent" ></div>
+		<dialog id="myDialog">
+			<h3>The game of Niv Meiri and Hadassa Zenou</h3>
+			<br>
+			<button id="close" onclick="closeDialog()">X</button>
+		</dialog>
+		
+
+	<div id="gameSetting" class="tabcontent">
+		<p style=" color: #f3ef05; font-size: 34px;"> ~Settings~</p>
+		<p style=" color: white;"> Number of eating Balls (between 50 to 90)
+			<input  id="NumOfBall" type="text" name="NumOfBall" style="width: 10%;" required></p>
+			  <p style="color: white;">Time of the game (minimum 60 seconds)
+				<input  id="TimeOfGame" type="text" name="TimeOfGame" style="width: 10%;" required></p>
+			  <p style=" color: white;">Number of monsters
+			<select id="selectMonster" >
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+			 </select></p>
+			 <p  style=" color: white;" for="username">Choose the color for each ball (by score):</p>
+
+				<p><label  style=" color: white;" for="username">5:</label>
+				<select id="colorBall_5" >
+					<option value="red">red</option>
+					<option value="orange">orange</option>
+					<option value="blue">blue</option>
+					<option value="green">green</option>
+					<option value="purple">purple</option>
+					<option value="pink">pink</option>
+					<option value="grey">grey</option>
+				 </select>
+				 <label  style="color: white;" for="username">15:</label>
+				<select id="colorBall_15" >
+					<option value="red">red</option>
+					<option value="orange">orange</option>
+					<option value="blue">blue</option>
+					<option value="green">green</option>
+					<option value="purple">purple</option>
+					<option value="pink">pink</option>
+					<option value="grey">grey</option>
+				 </select>
+				 <label  style=" color: white;" for="username">25:</label>
+				<select id="colorBall_25" >
+					<option value="red">red</option>
+					<option value="orange">orange</option>
+					<option value="blue">blue</option>
+					<option value="green">green</option>
+					<option value="purple">purple</option>
+					<option value="pink">pink</option>
+					<option value="grey">grey</option>
+				 </select></p>
+		<button  class="tablinks"  onclick="startGame($('#NumOfBall').val(),$('#TimeOfGame').val(),$('#selectMonster').val(),$('#colorBall_5').val(),$('#colorBall_15').val(),$('#colorBall_25').val())" value="Start Game">Start Playing</button></p>
+	</div>
+
+	<div id="start">
 		<div id="score">
 			<label for="lblScore">SCORE:</label>
 			<input id="lblScore" type="text" />
@@ -14,8 +91,9 @@
 			<label for="lblTime">TIME:</label>
 			<input id="lblTime" type="text" />
 		</div>
-		<div id="game">
-			<canvas id="canvas" height="600" width="600"></canvas>
+		<div class="canvas-container" id="game">
+			<canvas id="canvas" height="620" width="540"></canvas>
 		</div>
+	</div>
 	</body>
 </html>
