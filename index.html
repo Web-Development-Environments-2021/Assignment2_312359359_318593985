@@ -10,9 +10,9 @@
 	<body onload="onLoaded()">
 
 		<header  class="header">
-			<div align="center" ><img src= "picture/logo2.jpg"  width="15%" >
-			<img src= "picture/logo.png"  width="50%" >
-			<img src= "picture/logo2.jpg"  width="15%" ></div>
+			<div align="center" ><img src= "picture/logo2.jpg"  width="10%" >
+			<img src= "picture/logo.png"  width="20%" >
+			<img src= "picture/logo2.jpg"  width="10%" ></div>
 
 		<ul>
 			<li><a class="tablinks" onclick="ShowMenu('Welcome')" href="#">Welcome</a></li>
@@ -22,11 +22,19 @@
 			<li><a class="tablinks" onclick="ShowMenu('gameSetting')" href="#">StartGame</a></li>
 		  </ul>
 			
-		<div id="Welcome" class="tabcontent">
-			
+		<div id="Welcome" class="tabcontent" style="position: absolute;">
+			<span onclick="this.parentElement.style.display='none'" class="topright"></span>
 		</div>
-		<div id="Register" class="tabcontent"></div>
-		<div id="Login" class="tabcontent" ></div>
+	
+
+		<div id="Register" class="tabcontent" style="position: absolute;">
+			<span onclick="this.parentElement.style.display='none'" class="topright"></span>
+
+		</div>
+		<div id="Login" class="tabcontent"  style="position: absolute;" >
+			<span onclick="this.parentElement.style.display='none'" class="topright"></span>
+
+		</div>
 		<dialog id="myDialog">
 			<h3>The game of Niv Meiri and Hadassa Zenou</h3>
 			<br>
@@ -34,7 +42,9 @@
 		</dialog>
 		
 
-	<div id="gameSetting" class="tabcontent">
+	<div id="gameSetting" class="tabcontent" style="position: absolute; text-align: center; width: 100%;">
+		<span onclick="this.parentElement.style.display='none'" class="topright"></span>
+
 		<p style=" color: #f3ef05; font-size: 34px;"> ~Settings~</p>
 		<p style=" color: white;"> Number of eating Balls (between 50 to 90)
 			<input  id="NumOfBall" type="text" name="NumOfBall" style="width: 10%;" required></p>
@@ -82,7 +92,9 @@
 		<button  class="tablinks"  onclick="startGame($('#NumOfBall').val(),$('#TimeOfGame').val(),$('#selectMonster').val(),$('#colorBall_5').val(),$('#colorBall_15').val(),$('#colorBall_25').val())" value="Start Game">Start Playing</button></p>
 	</div>
 
-	<div id="start">
+	<div id="start" class="tabcontent">
+		<span onclick="this.parentElement.style.display='none'" class="topright"></span>
+
 		<div id="score">
 			<label for="lblScore">SCORE:</label>
 			<input id="lblScore" type="text" />
@@ -92,7 +104,8 @@
 			<input id="lblTime" type="text" />
 		</div>
 		<div class="canvas-container" id="game">
-			<canvas id="canvas" height="620" width="540"></canvas>
+			<canvas id="canvas" height="800" width="800"></canvas>
+			
 		</div>
 	</div>
 	</body>

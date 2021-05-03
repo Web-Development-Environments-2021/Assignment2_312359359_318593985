@@ -18,7 +18,7 @@ ul {
     display: block;
     color: rgb(14, 13, 13);
     text-align: center;
-    padding: 14px 16px;
+    padding: 12px 14px;
     text-decoration: none;
     font-family: "Monaco", "Courier New", monospace;
     font-weight: bold;
@@ -66,13 +66,32 @@ color: white;
 font-family: 'Matura MT Script Capitals';
 box-sizing: border-box;
 border-radius: 10px;
-width: 500px;
 margin-left: auto;
 margin-right: auto;
 z-index: -1;
   }
-.canvas-container {
+/* .canvas-container {
     display: flex;
     align-items: center;
     justify-content: center;
+} */
+.tabcontent{
+  position: absolute; 
+  text-align: center;
+  width: 100%;
+
+}
+#details {
+  background-color: #f3e6ff;
+  box-sizing: border-box;
+  padding: 0px 16px 0px 20px;
+  font-family: Comic sans MS;
+  margin-top: 4%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  font-stretch: expanded;
+  box-shadow: 5px 5px 5px rgb(155 152 152);
+  border-radius: 12px;
 }
