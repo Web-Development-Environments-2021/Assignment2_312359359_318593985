@@ -41,6 +41,5 @@ function startGame(balls,time,monster,color5,color15,color25){
   ShowMenu('start');
   Start(balls,time,monster,color5,color15,color25);
   }
-
-
-   }
+  }
+  
