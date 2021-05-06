@@ -22,8 +22,11 @@ var intervalMonster;
 var totalFood;
 var strawberry;
 var strawberryImage;
-var audio=new Audio("pacman.mp3");
-
+var audio;
+var timer;
+var timerImage;
+var winnerSound=new Audio("audio/winner.mp3");
+var loserSound=new Audio("audio/loser.mp3");
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -38,7 +41,11 @@ function Stop() {
 	  window.clearInterval(interval);
    }
 function Start(balls,time,monster,color5,color15,color25) {
+	audio=new Audio("audio/pacman.mp3");
+	winnerSound=new Audio("audio/winner.mp3");
+	loserSound=new Audio("audio/loser.mp3");
 	audio.play();
+	
 	board = new Array();
 	score = 0;
 	life=5;
@@ -70,6 +77,9 @@ function Start(balls,time,monster,color5,color15,color25) {
 	strawberryImage.src='picture/strawberry.png';
 	var monsterCount=0;
 	strawberry=new Object();
+	timerImage=new Image();
+	timerImage.src="picture/timer.png"
+	timer=new Object();
 	//food_before_monster=new Array();
 	for (var x=0;x<4;x++){
 		allMonsters[x]=new Object();
@@ -150,7 +160,8 @@ function Start(balls,time,monster,color5,color15,color25) {
 		foodPosition();
 		food_remain--;
 	}
-	startStrawberry()
+	startStrawberry();
+	startTimer();
 
 
 	keysDown = {};
@@ -169,7 +180,7 @@ function Start(balls,time,monster,color5,color15,color25) {
 		false
 	);
 	interval = setInterval(UpdatePosition, 250);
-	intervalMonster=setInterval(monsterPosition,1000);
+	//intervalMonster=setInterval(monsterPosition,250);
 
 }
 
@@ -309,11 +320,38 @@ function startStrawberry(){
 	strawberry.i=16;
 	strawberry.j=12;
 }
+function timerPosition(){
+	var degel=0;
+	while(degel==0){
+		var randomMove=Math.floor(Math.random() * 4 + 1);
+		if ((randomMove==1)&&(board[timer.i-1][timer.j]!=4)){
+			timer.i--;
+			degel=1;
+		}
+		if ((randomMove==2)&&(board[timer.i][timer.j-1]!=4)){
+			timer.j--;
+			degel=1;
+		}
+		if ((randomMove==3)&&(board[timer.i+1][timer.j]!=4)){
+			timer.i++;
+			degel=1;
+		}
+		if ((randomMove==4)&&(board[timer.i][timer.j+1]!=4)){
+			timer.j++;
+			degel=1;
+		}
+	}
+}
+function startTimer(){
+	var cell=findRandomEmptyCell(board);
+	timer.i=cell[0];
+	timer.j=cell[1];
+}
 
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
-	lblTime.value = Math.floor(time_elapsed);
+	lblTime.value = Math.floor(timeLimit-time_elapsed);
 	lblLife.value=life;
 	TimeLimit.value=timeLimit;
 	numFood.value=totalFood;
@@ -382,6 +420,7 @@ function Draw() {
 		context.drawImage(monstersImage[x],allMonsters[x].i*20,allMonsters[x].j*20,20,20);
 	}
 	context.drawImage(strawberryImage,strawberry.i*20,strawberry.j*20,20,20);
+	context.drawImage(timerImage,timer.i*20,timer.j*20,20,20);
 }
 
 
@@ -389,6 +428,8 @@ function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
 	strawberryPosition();
+	timerPosition();
+	monsterPosition();
 	//keyDirect=GetKeyPressed();
 	if (x == 1) {
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
@@ -435,20 +476,33 @@ function UpdatePosition() {
 		score+=50;
 		startStrawberry();
 	}
+	else if(shape.i==timer.i&&shape.j==timer.j){
+		timeLimit=Number(timeLimit)+15;
+		startTimer();
+	}
 	board[shape.i][shape.j] = 2;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	if (life<1){
 		window.clearInterval(interval);
-		window.alert("Loser!!!");
+		//window.alert("Loser!!!");
+		openDialog('loser');
+		audio.pause();
+		loserSound.play();
 	}
 	else if (time_elapsed>=timeLimit){
 		window.clearInterval(interval);
 		if (score<100){
-		window.alert("You are better then "+scor+"points!");
+		better.innerText="You are better than " + score + " points!";
+		openDialog("better then");
+		audio.pause()
+
 		}
 		else{
-			window.alert("Winner!!!");
+			openDialog("winner");
+			audio.pause();
+			winnerSound.play();
+			//window.alert("Winner!!!");
 		}
 	}
 	 else {

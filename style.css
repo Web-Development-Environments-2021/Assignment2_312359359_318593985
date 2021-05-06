@@ -33,11 +33,23 @@ ul {
     background-color: #227525;
   }
   #myDialog{
-    width: 60%;
+    width: 80%;
+    height: 80%;
   /*border-radius: 25px;*/
   border: 2px solid Black;
   padding: 15px 15px 15px 15px;
-  
+  background: #f3e305;
+  overflow: visible;
+  box-shadow: 5px 5px 2px #888888;
+  position: relative;
+  display: none;
+  }
+  .dialog{
+    width: 30%;
+    height: 30%;
+  /*border-radius: 25px;*/
+  border: 2px solid Black;
+  padding: 15px 15px 15px 15px;
   background: #f3e305;
   overflow: visible;
   box-shadow: 5px 5px 2px #888888;
@@ -78,7 +90,8 @@ z-index: -1;
 .tabcontent{
   position: absolute; 
   text-align: center;
-  width: 100%;
+  width: 90%;
+  display: none;
 
 }
 #showSettings{
@@ -89,16 +102,16 @@ z-index: -1;
   border: 4px solid rgb(194, 3, 3);
   border-radius: 8px;
   margin-left: 15px;
-  
-  
-
+  display: none;
 }
 #start{
   display: flex;
   margin-top: 8px;
-  margin-left: 15px;
+  margin-left: 8%;
   font-family: "Matura MT Script Capitals";
   text-align: left;
+  display: grid;
+  grid-template-columns: auto auto;
 }
 /* #lblScore{
   border-radius: 6px;
@@ -153,4 +166,8 @@ z-index: -1;
   font-size: 40px;
 
 
+}
+.grid{
+  display: flex;
+  justify-items: center;
 }

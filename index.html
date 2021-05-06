@@ -17,11 +17,11 @@
 			<li><a class="tablinks" onclick="ShowMenu('Welcome')" href="#">Welcome</a></li>
 			<li><a class="tablinks" onclick="ShowMenu('Register')" href="#">Register</a></li>
 			<li><a class="tablinks" onclick="ShowMenu('Login')" href="#">Login</a></li>
-			<li> <a class="tablinks" id="dialog" onclick="openDialog()">About</a></li>
+			<li> <a class="tablinks" id="dialog" onclick="openDialog('myDialog')">About</a></li>
 			<li><a class="tablinks" onclick="ShowMenu('gameSetting')" href="#">StartGame</a></li>
 		</ul>
 			
-		<div id="Welcome" class="tabcontent" style="position: absolute;">
+		<div id="Welcome" class="tabcontent" style="position: absolute;" >
 			<p id="Welcome">Welcome to the best PACMAN game in the world!!</p>
 			<button  class="button"  onclick="ShowMenu('Register')" href="#">Register</button>
 			<button  class="button"  onclick="ShowMenu('Login')" href="#">Login</button>
@@ -31,14 +31,17 @@
 
 		<div id="Register" class="tabcontent" style="position: absolute;">
 			<p style="color: white;">Register page</p>
+			
+			
 		</div>
 		<div id="Login" class="tabcontent"  style="position: absolute;" >
 			<p style="color: white;">Login page</p>
 		</div>
 		<dialog id="myDialog">
+			
 			<h3>The game of Niv Meiri and Hadassa Zenou</h3>
 			<br>
-			<button id="close" onclick="closeDialog()">X</button>
+			<button id="close" onclick="closeDialog('myDialog')">X</button>
 		</dialog>
 		
 
@@ -47,9 +50,9 @@
 
 		<p style=" color: #f3e305; font-size: 34px;"> ~Settings~</p>
 		<p style=" color: white;"> Number of eating Balls (between 50 to 90)
-			<input  id="NumOfBall" type="text"  name="NumOfBall" style="width: 10%;" required></p>
+			<input  id="NumOfBall" type="text" value="60" name="NumOfBall" style="width: 10%;" required></p>
 			  <p style="color: white;">Time of the game (minimum 60 seconds)
-				<input  id="TimeOfGame" type="text" name="TimeOfGame" style="width: 10%;" required></p>
+				<input  id="TimeOfGame" type="text" value="60" name="TimeOfGame" style="width: 10%;" required></p>
 			  <p style=" color: white;">Number of monsters
 			<select id="selectMonster" >
 				<option value="1">1</option>
@@ -84,8 +87,9 @@
 	</div>
 
 	<div id="start" class="tabcontent">
-		<canvas id="canvas" height="460" width="740"></canvas>
-		<div id="showSettings">
+		<div class="grid">
+		<canvas  id="canvas" height="460" width="740"></canvas>
+		<div  id="showSettings" >
 			<div id="textSettings">
 			<div id="score_time_life">
 			<div id="score">
@@ -131,6 +135,27 @@
 		</div>
 		</div>
 	</div>
+	</div>
+	<dialog id="winner" class="dialog">
+		<h3>Winner!!!</h3>
+		<br>
+		<button id="close" onclick="closeDialog('winner')">X</button>
+		<img src="picture/winner.png" width="40%">
+	</dialog>
+	<dialog id="loser"  class="dialog">
+		<h3>Loser!</h3>
+		<br>
+		<img src="picture/loser.png" width="40%">
+		<button id="close" onclick="closeDialog('loser')">X</button>
+	</dialog>
+	<dialog id="better then"  class="dialog">
+		<h3 id="better"></h3>
+
+		<br>
+		
+		<button id="close" onclick="closeDialog('better then')">X</button>
+	</dialog>
+
 	
 	</body>
 </html>
