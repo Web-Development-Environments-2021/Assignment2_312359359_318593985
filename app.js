@@ -180,7 +180,7 @@ function Start(balls,time,monster,color5,color15,color25) {
 		false
 	);
 	interval = setInterval(UpdatePosition, 250);
-	//intervalMonster=setInterval(monsterPosition,250);
+	intervalMonster=setInterval(monsterPosition,600);
 
 }
 
@@ -429,7 +429,7 @@ function UpdatePosition() {
 	var x = GetKeyPressed();
 	strawberryPosition();
 	timerPosition();
-	monsterPosition();
+	//monsterPosition();
 	//keyDirect=GetKeyPressed();
 	if (x == 1) {
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
