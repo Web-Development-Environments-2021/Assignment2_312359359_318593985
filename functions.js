@@ -40,10 +40,6 @@ function openDialog(id) {
   
   var id3 = document.getElementById(id);
   id3.style.display="block";
-  myDialog.setCanceledOnTouchOutside(true);
-
-  isOpen=true;
-  
   
 }
 function closeDialog(id) { 
@@ -51,23 +47,23 @@ function closeDialog(id) {
   
   var id3 = document.getElementById(id);
   id3.style.display="none";
-  isOpen=false;
+  
 }
 
 
 
-// function lisener(){
-//   window.onclick = function(event) {
-//     if (ismyDialog.style.display=="block") {
-//       closeDialog("myDialog");
-//     }
-//   }
-// }
+  window.onclick = function(event) {
+    if(((event.target)!=about)&&(event.target!=myDialog))
+{
+    // hide menu
+      closeDialog("myDialog");
+    }
+  }
+
 
 $(document).keyup(function(e) {
 	if (e.key === "Escape") {
 		closeDialog("myDialog");
-		
    }
 });
 
@@ -85,30 +81,5 @@ function startGame(balls,time,monster,color5,color15,color25){
 
   }
   }
-  function modalAbout(modal_name){
-    document.getElementById(modal_name).style.display="block";
-  }
   
-  function modalClose(modal_name){
-    document.getElementById(modal_name).style.display="none";
-    document.getElementById("better").style.display="none";
-    document.getElementById("fireworks").style.display="none";
-    document.getElementById("loser").style.display="none";
-  }
-  
-  window.onclick = function(event) {
-    if (myModal.style.display=="block") {
-      modalClose("myModal");
-    }
-    else if(event.target == document.getElementById("SettingModal")){
-      modalClose("SettingModal");
-    }
-  }
-  
-  $(document).keyup(function(e) {
-    if (e.key === "Escape") {
-      modalClose("myModal");
-      modalClose("SettingModal");
-     }
-  });
   
