@@ -107,8 +107,7 @@ z-index: -1;
 }
 #start{
   display: flex;
-  margin-top: 8px;
-  margin-left: 8%;
+  margin-top: 5px;
   font-family: "Matura MT Script Capitals";
   text-align: left;
   display: grid;
@@ -171,5 +170,22 @@ z-index: -1;
 .grid{
   display: flex;
   justify-items: center;
+  margin-left: 6%;
+}
+footer{
+	position: fixed;
+  color: rgb(7, 7, 7);
+	bottom: 0;
+	width: 100%;
+  font-size: 12px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+	height: 14px;
+	overflow: hidden;
+	background-color: rgba(239, 245, 245, 0.979);
+	text-align: center;
+	border-radius: 10px 10px;
+	border: 5px solid black;
+	list-style-type: none;
+	z-index: -1;
 }
 

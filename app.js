@@ -27,6 +27,7 @@ var timer;
 var timerImage;
 var winnerSound=new Audio("audio/winner.mp3");
 var loserSound=new Audio("audio/loser.mp3");
+var isPlay;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -80,6 +81,8 @@ function Start(balls,time,monster,color5,color15,color25) {
 	timerImage=new Image();
 	timerImage.src="picture/timer.png"
 	timer=new Object();
+	lblMusic.src="picture/volume.ico";
+	isPlay=true;
 	//food_before_monster=new Array();
 	for (var x=0;x<4;x++){
 		allMonsters[x]=new Object();
@@ -179,12 +182,16 @@ function Start(balls,time,monster,color5,color15,color25) {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 250);
-	intervalMonster=setInterval(monsterPosition,600);
-
+	interval = setInterval(UpdatePosition, 150);
+	intervalMonster=setInterval(moveOtherElement,500);
+	
 }
 
-
+function moveOtherElement(){
+	monsterPosition();
+	strawberryPosition();
+	timerPosition();
+}
 function foodPosition(){
 	var emptyCell = findRandomEmptyCell(board);
 	i=emptyCell[0];
@@ -427,8 +434,8 @@ function Draw() {
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
-	strawberryPosition();
-	timerPosition();
+	//strawberryPosition();
+	//timerPosition();
 	//monsterPosition();
 	//keyDirect=GetKeyPressed();
 	if (x == 1) {
@@ -514,5 +521,18 @@ function isMonster(i,j){
 		if ((i==allMonsters[x].i)&&(j==allMonsters[x].j)){
 			return true;
 		}
+	}
+}
+
+function playMusic(){
+	if (isPlay){
+		audio.pause()
+		lblMusic.src="picture/mute.ico"
+		isPlay=false;
+	}
+	else{
+		audio.play()
+		lblMusic.src="picture/volume.ico"
+		isPlay=true;
 	}
 }

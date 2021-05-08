@@ -81,5 +81,19 @@ function startGame(balls,time,monster,color5,color15,color25){
 
   }
   }
+  $(document).ready(function() {
+
+    var rangesliderballs = document.getElementById("NumOfBall"); 
+    var outputballs = document.getElementById("showBalls"); 
+    outputballs.innerHTML = rangesliderballs.value; 
+    
+    rangesliderballs.oninput = function() { 
+    outputballs.innerHTML = this.value; 
+    }
+  
+    
+      });
+
+
   
   
