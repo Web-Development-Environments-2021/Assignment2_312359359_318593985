@@ -29,6 +29,7 @@ var winnerSound=new Audio("audio/winner.mp3");
 var loserSound=new Audio("audio/loser.mp3");
 var isPlay;
 
+
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	Start();
@@ -41,6 +42,7 @@ function Stop() {
    function clearI(){
 	  window.clearInterval(interval);
    }
+   // initate the game and set the params from user//
 function Start(balls,time,monster,color5,color15,color25) {
 	audio=new Audio("audio/pacman.mp3");
 	winnerSound=new Audio("audio/winner.mp3");
@@ -87,11 +89,15 @@ function Start(balls,time,monster,color5,color15,color25) {
 	for (var x=0;x<4;x++){
 		allMonsters[x]=new Object();
 	}
+	// locate the monster on the board//
 	startPositionMonster();
+
 	for (var i = 0; i < 37; i++) {
 		board[i] = new Array();
 		//27X31
+
 		for (var j = 0; j < 23; j++) {
+			
 			if ((i == 0)|| (j == 0)||
 				(j == 22)|| (i == 36)||
 				((i==2||i==3||i==30||i==31)&&(j==2||j==3
@@ -142,7 +148,7 @@ function Start(balls,time,monster,color5,color15,color25) {
 				||j==16||j==17||j==18||j==19||j==20||
 				j==22||j==23||j==24||j==25))||((i==29)&&(j==13||j==14))
 				) {
-				board[i][j] = 4;
+				board[i][j] = 4;//build the walls on the board
 			} 
 			
 			else {
@@ -151,18 +157,20 @@ function Start(balls,time,monster,color5,color15,color25) {
 					shape.i = i;
 					shape.j = j;
 					pacman_remain--;
-					board[i][j] = 2;
+					board[i][j] = 2;//pacman
 				} else {
-					board[i][j] = 0;
+					board[i][j] = 0;//nothing
 				}
 				cnt--;
 			}
 		}
 	}
+	//locate the food
 	while (food_remain > 0) {
 		foodPosition();
 		food_remain--;
 	}
+	//locate the straberry and timer
 	startStrawberry();
 	startTimer();
 
@@ -182,7 +190,9 @@ function Start(balls,time,monster,color5,color15,color25) {
 		},
 		false
 	);
+	//intervall for moving the pacman
 	interval = setInterval(UpdatePosition, 150);
+	//interval for moving the other object(slower then the pacman)
 	intervalMonster=setInterval(moveOtherElement,500);
 	
 }
@@ -192,6 +202,7 @@ function moveOtherElement(){
 	strawberryPosition();
 	timerPosition();
 }
+//find random cell for the food
 function foodPosition(){
 	var emptyCell = findRandomEmptyCell(board);
 	i=emptyCell[0];
@@ -257,6 +268,8 @@ function monsterPosition(){
 		}
 	}
 }
+
+//move the monsters using Manheten Heuristic 
 function bestMoveMonster(i,j){
 	bestMove="";
 	minDistance=9999999;
@@ -290,7 +303,7 @@ function bestMoveMonster(i,j){
 	}
 	return bestMove;
 }
-
+//locate the monsters at the 4 corners
 function startPositionMonster(){
 	allMonsters[0].i=1;
 	allMonsters[0].j=1;
@@ -301,6 +314,7 @@ function startPositionMonster(){
 	allMonsters[3].i=29;
 	allMonsters[3].j=21;
 }
+
 function strawberryPosition(){
 	var degel=0;
 	while(degel==0){
@@ -323,6 +337,7 @@ function strawberryPosition(){
 		}
 	}
 }
+//locate the straberry in the middle
 function startStrawberry(){
 	strawberry.i=16;
 	strawberry.j=12;
@@ -382,43 +397,43 @@ function Draw() {
                                 context.arc(center.x, center.y, 9, 1.15 * Math.PI, 0.85 * Math.PI); // half circle left
                             else if(keyDirect==2)
                                 context.arc(center.x, center.y, 9, 0.65 * Math.PI, 0.35 * Math.PI); // half circle down
-                            else context.arc(center.x, center.y, 9, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+                            else context.arc(center.x, center.y, 9, 0.15 * Math.PI, 1.85 * Math.PI); 
 				
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
 				context.beginPath();
 							if(keyDirect==1)
-                                context.arc(center.x - 6, center.y - 4, 2, 0, 2 * Math.PI); // circle
+                                context.arc(center.x - 6, center.y - 4, 2, 0, 2 * Math.PI); 
                             else if(keyDirect==2)
-                                context.arc(center.x - 6, center.y + 4, 2, 0, 2 * Math.PI); // circle
+                                context.arc(center.x - 6, center.y + 4, 2, 0, 2 * Math.PI); 
                             else if(keyDirect==3)
-                                context.arc(center.x - 1, center.y - 6, 2, 0, 2 * Math.PI); // circle
-                            else context.arc(center.x + 1, center.y - 6, 2, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
+                                context.arc(center.x - 1, center.y - 6, 2, 0, 2 * Math.PI); 
+                            else context.arc(center.x + 1, center.y - 6, 2, 0, 2 * Math.PI); 
+				context.fillStyle = "black"; 
 				context.fill();
 			} else if (board[i][j] == 5) {
 				context.beginPath();
-				context.arc(center.x, center.y, 4, 0, 2 * Math.PI); // circle
-				context.fillStyle = colorBall5; //color
+				context.arc(center.x, center.y, 4, 0, 2 * Math.PI); 
+				context.fillStyle = colorBall5; 
 				context.fill();
 				
 			} else if (board[i][j] == 15) {
 				context.beginPath();
-				context.arc(center.x, center.y, 6, 0, 2 * Math.PI); // circle
-				context.fillStyle = colorBall15; //color
+				context.arc(center.x, center.y, 6, 0, 2 * Math.PI); 
+				context.fillStyle = colorBall15; 
 				context.fill();
 				
 			} else if (board[i][j] == 25) {
 				context.beginPath();
-				context.arc(center.x, center.y, 8, 0, 2 * Math.PI); // circle
-				context.fillStyle = colorBall25; //color
+				context.arc(center.x, center.y, 8, 0, 2 * Math.PI); 
+				context.fillStyle = colorBall25; 
 				context.fill();
 				
 			} else if (board[i][j] == 4) {
 				context.beginPath();
 				context.rect(center.x - 10, center.y - 10, 20, 20,0);
-				context.fillStyle = "blue"; //color
+				context.fillStyle = "blue"; 
 				context.fill();
 			}
 		}
@@ -434,10 +449,7 @@ function Draw() {
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
-	//strawberryPosition();
-	//timerPosition();
-	//monsterPosition();
-	//keyDirect=GetKeyPressed();
+	
 	if (x == 1) {
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
@@ -516,6 +528,7 @@ function UpdatePosition() {
 		Draw();
 	}
 }
+//check if there is a monster in the cell
 function isMonster(i,j){
 	for (x=0;x<numOfMonster;x++){
 		if ((i==allMonsters[x].i)&&(j==allMonsters[x].j)){
@@ -536,3 +549,14 @@ function playMusic(){
 		isPlay=true;
 	}
 }
+//get the input from the scroller
+$(document).ready(function() {
+
+    var rangesliderballs = document.getElementById("NumOfBall"); 
+    var outputballs = document.getElementById("showBalls"); 
+    outputballs.innerHTML = rangesliderballs.value; 
+    
+    rangesliderballs.oninput = function() { 
+    outputballs.innerHTML = this.value; 
+    }
+  });
